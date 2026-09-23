@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+:root {
+  --bg-page: #f7f3ee;
+  --bg-card: #f3efe8;
+  --bg-section-alt: #ede7de;
+  --bg-image-tile: #d8cec2;
+
+  --text-primary: #1a1714;
+  --text-secondary: #a89b8f;
+
+  --border: #c9bdb3;
+
+  --accent-dark: #3d3733;
+  --whatsapp: #25d366;
+  --whatsapp-dark: #128c7e;
+}
+
+@theme inline {
+  --color-bg-page: var(--bg-page);
+  --color-bg-card: var(--bg-card);
+  --color-bg-section-alt: var(--bg-section-alt);
+  --color-bg-image-tile: var(--bg-image-tile);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-border: var(--border);
+  --color-accent-dark: var(--accent-dark);
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-dark: var(--whatsapp-dark);
+
+  --font-display: var(--font-bebas), sans-serif;
+  --font-body: var(--font-inter), sans-serif;
+  --font-price: var(--font-cormorant), serif;
+}
+
+body {
+  background: var(--bg-page);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+}
+
+* {
+  border-color: var(--border);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
