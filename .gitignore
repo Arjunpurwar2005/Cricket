@@ -42,6 +42,9 @@ yarn-error.log*
 # local sqlite dev database
 prisma/dev.db
 
+# playwright cli artifacts
+.playwright-cli/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

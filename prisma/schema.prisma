@@ -3,18 +3,18 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 model Product {
-  id                String   @id @default(cuid())
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
   name              String
   slug              String   @unique
   sku               String   @unique
-  brandId           String
+  brandId           String   @db.ObjectId
   brand             Brand    @relation(fields: [brandId], references: [id])
-  categoryId        String
+  categoryId        String   @db.ObjectId
   category          Category @relation(fields: [categoryId], references: [id])
   subcategory       String?
   images             String  @default("[]") // JSON string array of image URLs, first = primary
@@ -44,7 +44,7 @@ model Product {
 }
 
 model Category {
-  id          String    @id @default(cuid())
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   slug        String    @unique
   description String    @default("")
@@ -53,7 +53,7 @@ model Category {
 }
 
 model Brand {
-  id       String    @id @default(cuid())
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
   name     String
   slug     String    @unique
   order    Int       @default(0)
@@ -61,13 +61,13 @@ model Brand {
 }
 
 model Admin {
-  id           String @id @default(cuid())
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
   email        String @unique
   passwordHash String
 }
 
 model Sale {
-  id            String   @id @default(cuid())
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
   date          DateTime
   productName   String
   costPrice     Float
@@ -82,7 +82,7 @@ model Sale {
 }
 
 model Settings {
-  id                      String  @id @default("singleton")
+  id                      String  @id @map("_id") @default("singleton")
   whatsappNumber          String  @default("910000000000")
   generalMessage          String  @default("Hi, I'd like to know more about your cricket equipment.")
   productEnquiryTemplate  String  @default("Hi, I'm interested in {name} ({brand}).\n\nListed price: ₹{price}\nMRP: ₹{mrp}\n{variant}SKU: {sku}\n\nPlease share availability and details.\nProduct link: {url}")
